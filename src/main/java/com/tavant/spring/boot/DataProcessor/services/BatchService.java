@@ -22,6 +22,10 @@ public class BatchService {
         return batchRepository.save(batch);
     }
     
+    public Batch findBatchById(int id) throws ResourcesNotFoundException {
+        return batchRepository.findById(id)
+                .orElseThrow(() -> new ResourcesNotFoundException("Batch not found"));
+    }
     public List<Batch> findAll() {
         return batchRepository.findAll();
     }

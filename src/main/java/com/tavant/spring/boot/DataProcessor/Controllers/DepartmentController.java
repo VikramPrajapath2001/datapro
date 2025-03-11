@@ -14,11 +14,21 @@ import com.tavant.spring.boot.DataProcessor.services.DepartmentService;
 
 @RestController
 @RequestMapping("/api/departments")
+@CrossOrigin("http://localhost:4200")
 public class DepartmentController {
 
     @Autowired
     private DepartmentService departmentService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Department> getDepartmentById(@PathVariable int id) {
+        try {
+            Department department = departmentService.findDepartmentById(id);
+            return new ResponseEntity<>(department, HttpStatus.OK);
+        } catch (ResourcesNotFoundException e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
     /**
      * Retrieve a list of all departments.
      */

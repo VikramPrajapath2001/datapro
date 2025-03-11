@@ -1,5 +1,6 @@
 package com.tavant.spring.boot.DataProcessor.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -45,11 +46,53 @@ public class Department {
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Batch> batches;
 
+    public Department() {}
     public Department(String name, String hod, College college, List<Batch> batches) {
         this.name = name;
         this.hod = hod;
         this.college = college;
-        this.batches = batches;
+        this.batches = batches == null ? new ArrayList<>() : batches;
     }
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getHod() {
+		return hod;
+	}
+
+	public void setHod(String hod) {
+		this.hod = hod;
+	}
+
+	public College getCollege() {
+		return college;
+	}
+
+	public void setCollege(College college) {
+		this.college = college;
+	}
+
+	public List<Batch> getBatches() {
+		return batches;
+	}
+
+	public void setBatches(List<Batch> batches) {
+		this.batches = batches;
+	}
+    
 }
 

@@ -29,6 +29,10 @@ public class DepartmentService {
         return departmentRepository.findAll();
     }
 
+    public Department findDepartmentById(int id) throws ResourcesNotFoundException {
+        return departmentRepository.findById(id)
+                .orElseThrow(() -> new ResourcesNotFoundException("Department not found"));
+    }
     public Department findByNameAndCollegeId(String name, Long collegeId) throws ResourcesNotFoundException, ObjectsMalformedException {
         if (name == null || name.isEmpty() || collegeId == null) {
             throw new ObjectsMalformedException("Department name or College ID is null or empty. Cannot retrieve department.");

@@ -12,11 +12,21 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/batches")
+@CrossOrigin("http://localhost:4200")
 public class BatchController {
 
     @Autowired
     private BatchService batchService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Batch> getBatchById(@PathVariable int id) {
+        try {
+            Batch batch = batchService.findBatchById(id);
+            return new ResponseEntity<>(batch, HttpStatus.OK);
+        } catch (ResourcesNotFoundException e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
     /**
      * Retrieve a list of all batches.
      * 
@@ -34,17 +44,17 @@ public class BatchController {
      * @param name The name of the batch.
      * @return ResponseEntity with the Batch object and HTTP status.
      */
-    @GetMapping("/{name}")
-    public ResponseEntity<Batch> getBatchByName(@PathVariable String name) {
-        try {
-            Batch batch = batchService.findBatchByName(name);
-            return new ResponseEntity<>(batch, HttpStatus.OK);
-        } catch (ResourcesNotFoundException e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        } catch (ObjectsMalformedException e) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-    }
+//    @GetMapping("/{name}")
+//    public ResponseEntity<Batch> getBatchByName(@PathVariable String name) {
+//        try {
+//            Batch batch = batchService.findBatchByName(name);
+//            return new ResponseEntity<>(batch, HttpStatus.OK);
+//        } catch (ResourcesNotFoundException e) {
+//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//        } catch (ObjectsMalformedException e) {
+//            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+//        }
+//    }
 
     /**
      * Retrieve a list of batches by the staff member's name.

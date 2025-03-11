@@ -16,6 +16,7 @@ import lombok.ToString;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @Table(name = "student")
 @Getter
@@ -31,6 +32,7 @@ public class Student {
     private String name;
 
     @Column(name = "date_of_birth", nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
     @JsonBackReference
@@ -43,6 +45,41 @@ public class Student {
         this.dateOfBirth = dateOfBirth;
         this.batch = batch;
     }
+    
+    public Student() {}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public Batch getBatch() {
+		return batch;
+	}
+
+	public void setBatch(Batch batch) {
+		this.batch = batch;
+	}
+    
 }
 
 
