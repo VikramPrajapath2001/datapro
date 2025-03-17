@@ -22,7 +22,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "college")
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
 public class College {
     @Id

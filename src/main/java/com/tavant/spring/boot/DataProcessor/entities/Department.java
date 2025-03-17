@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "department")
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
 public class Department {
     @Id

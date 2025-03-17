@@ -34,22 +34,6 @@ public class CollegeService {
         return collegeRepository.findAll();
     }
     
-//    public College createCollege(College college) throws ObjectsMalformedException {
-//        if (college == null || college.getName() == null || college.getAddress() == null) {
-//            throw new ObjectsMalformedException("College object not created properly. Cannot save.");
-//        }
-//
-//        for (Department department : college.getDepartments()) {
-//            department.setCollege(college);
-//            for (Batch batch : department.getBatches()) {
-//                batch.setDepartment(department);
-//                for (Student student : batch.getStudents()) {
-//                    student.setBatch(batch);
-//                }
-//            }
-//        }
-//        return collegeRepository.save(college);
-//    }
 
     public College findCollegeByName(String name) throws ResourcesNotFoundException, ObjectsMalformedException {
         if (name == null || name.isEmpty()) {

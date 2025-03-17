@@ -11,6 +11,7 @@ import com.tavant.spring.boot.DataProcessor.exceptions.ResourcesNotFoundExceptio
 import com.tavant.spring.boot.DataProcessor.services.StudentService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * REST controller for managing Student entities.
@@ -56,18 +57,24 @@ public class StudentController {
      * @param id The ID of the student.
      * @param name The new name of the student.
      * @return ResponseEntity with the number of updated rows and HTTP status.
+     * @throws ObjectsMalformedException 
      */
     @PutMapping("/name/{id}")
-    public ResponseEntity<Integer> updateStudentName(@PathVariable int id, @RequestParam String name) {
+    public ResponseEntity<Integer> updateStudentName(
+            @PathVariable int id, 
+            @RequestBody Map<String, String> body) throws ObjectsMalformedException {
+        String name = body.get("name");
+        if (name == null || name.isEmpty()) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
         try {
             int updatedCount = studentService.updateStudentName(id, name);
             return new ResponseEntity<>(updatedCount, HttpStatus.OK);
         } catch (ResourcesNotFoundException e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        } catch (ObjectsMalformedException e) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
+
 
     /**
      * Delete a student by its ID.

@@ -18,6 +18,12 @@ public class BatchController {
     @Autowired
     private BatchService batchService;
 
+    /**
+     * Retrieve a batch by its id.
+     * 
+     * @param id The id of the batch.
+     * @return ResponseEntity with the Batch object and HTTP status.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Batch> getBatchById(@PathVariable int id) {
         try {
@@ -37,24 +43,6 @@ public class BatchController {
         List<Batch> batches = batchService.findAll();
         return new ResponseEntity<>(batches, HttpStatus.OK);
     }
-
-    /**
-     * Retrieve a batch by its name.
-     * 
-     * @param name The name of the batch.
-     * @return ResponseEntity with the Batch object and HTTP status.
-     */
-//    @GetMapping("/{name}")
-//    public ResponseEntity<Batch> getBatchByName(@PathVariable String name) {
-//        try {
-//            Batch batch = batchService.findBatchByName(name);
-//            return new ResponseEntity<>(batch, HttpStatus.OK);
-//        } catch (ResourcesNotFoundException e) {
-//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-//        } catch (ObjectsMalformedException e) {
-//            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-//        }
-//    }
 
     /**
      * Retrieve a list of batches by the staff member's name.

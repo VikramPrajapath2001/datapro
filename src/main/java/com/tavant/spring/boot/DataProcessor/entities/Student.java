@@ -21,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name = "student")
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
 public class Student {
     @Id

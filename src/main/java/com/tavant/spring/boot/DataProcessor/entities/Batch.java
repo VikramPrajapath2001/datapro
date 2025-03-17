@@ -23,7 +23,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "batch")
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
 public class Batch {
     @Id
